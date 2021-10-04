@@ -14,55 +14,56 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.shrabonti.digitalhospital.Model.HospitalModel;
+import com.shrabonti.digitalhospital.Model.CategoryModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HospitalVM extends AndroidViewModel {
-    public HospitalVM(@NonNull Application application) {
+public class CategoryVM extends AndroidViewModel {
+    public CategoryVM(@NonNull Application application) {
         super(application);
         Log.d("ViewModel", "allViewModel:4 Level_D_VM start");
     }
     public MutableLiveData mLiveData;
-    public MutableLiveData<List<HospitalModel>> LoadLevel4List() {
-        List<HospitalModel> listHospitalItem ; listHospitalItem =new ArrayList<>();
+    public MutableLiveData<List<CategoryModel>> LoadLevel4List(String dsHospitalUID) {
+        List<CategoryModel> listCategoryItem ; listCategoryItem =new ArrayList<>();
 
         CollectionReference notebookRef;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Log.d("ViewModel", "allViewModel:4 LoadLevel4List start");
 
-        notebookRef = db.collection("AllHospital");
+        notebookRef = db.collection("AllHospital").document(dsHospitalUID).collection("AllCategory");
 
         if(mLiveData == null) {
             mLiveData = new MutableLiveData();
-            notebookRef.orderBy("HospitaliPriority", Query.Direction.ASCENDING).get()
+            notebookRef.orderBy("CategoryiPriority", Query.Direction.ASCENDING).get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {   //documnet er vitore je multiple document query ache er jonno for loop
                             String data = "";
                             if(queryDocumentSnapshots.isEmpty()) {
-                                //String UID, String hospitalName, String hospitalPhotoUrl, String hospitalBio, String hospitalCreator, String hospitalAddress, long hospitaliPriority
-                                listHospitalItem.add(new HospitalModel("UID","NULL", "hospitalPhotoUrl", "hospitalBio", "hospitalCreator", "hospitalAddress",  0));
-                                mLiveData.postValue(listHospitalItem);
+                                //String categoryUID, String categoryName, String categoryPhotoUrl, String categoryBio, String categoryCreator, long categoryiViews, long categoryiPriority, long categoryiClicked
+                                listCategoryItem.add(new CategoryModel("UID","NULL", "categoryPhotoUrl", "categoryBio", "categoryCreator",0,0, 0));
+                                mLiveData.postValue(listCategoryItem);
                                 Log.d("ViewModel", "allViewModel:4 queryDocumentSnapshots empty");
                             }else {
                                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                    HospitalModel book_model = documentSnapshot.toObject(HospitalModel.class);
+                                    CategoryModel book_model = documentSnapshot.toObject(CategoryModel.class);
                                     //messageModel.setDocumentID(documentSnapshot.getId());
-                                    String dsHospital_UID = documentSnapshot.getId();
-                                    String dsHospital_Name = book_model.getHospitalName();
-                                    String dsHospital_PhotoUrl = book_model.getHospitalPhotoUrl();
-                                    String dsHospital_Bio= book_model.getHospitalBio();
-                                    String dsHospital_Creator= book_model.getHospitalCreator();
-                                    String dsHospital_Address = book_model.getHospitalAddress();
-                                    long dibookiPriority = book_model.getHospitaliPriority();
+                                    String dsCategory_UID = documentSnapshot.getId();
+                                    String dsCategory_Name = book_model.getCategoryName();
+                                    String dsCategory_PhotoUrl = book_model.getCategoryPhotoUrl();
+                                    String dsCategory_Bio= book_model.getCategoryBio();
+                                    String dsCategory_Creator= book_model.getCategoryCreator();
+                                    long diCategoryView = book_model.getCategoryiViews();
+                                    long diCategoryiPriority = book_model.getCategoryiPriority();
+
 
                                     //String UID, String hospitalName, String hospitalPhotoUrl, String hospitalBio, String hospitalCreator, String hospitalAddress, long hospitaliPriority
-                                    listHospitalItem.add(new HospitalModel(dsHospital_UID,dsHospital_Name, dsHospital_PhotoUrl,dsHospital_Bio,dsHospital_Creator, dsHospital_Address, dibookiPriority));
-                                    mLiveData.postValue(listHospitalItem);
+                                    listCategoryItem.add(new CategoryModel(dsCategory_UID, dsCategory_Name,dsCategory_PhotoUrl,dsCategory_Bio, dsCategory_Creator,diCategoryView,diCategoryiPriority, 0));
+                                    mLiveData.postValue(listCategoryItem);
                                 }
-                                mLiveData.postValue(listHospitalItem);    //All Items level 4 , it is a one type category
+                                mLiveData.postValue(listCategoryItem);    //All Items level 4 , it is a one type category
 
                             }
                         }

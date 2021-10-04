@@ -1,4 +1,4 @@
-package com.shrabonti.digitalhospital;
+package com.shrabonti.digitalhospital.Model;
 
 public class HospitalModel {
     

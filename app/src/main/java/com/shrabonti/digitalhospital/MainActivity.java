@@ -20,12 +20,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.shrabonti.digitalhospital.Adapter.HospitalAdapter;
+import com.shrabonti.digitalhospital.Model.HospitalModel;
 import com.shrabonti.digitalhospital.View.Category;
-import com.shrabonti.digitalhospital.View.CategoryAdd;
 import com.shrabonti.digitalhospital.View.Hospital_Add;
 import com.shrabonti.digitalhospital.View.LoginRegistration;
 import com.shrabonti.digitalhospital.ViewModel.HospitalVM;
@@ -169,11 +168,11 @@ public class MainActivity extends AppCompatActivity implements RecylerviewClickI
 
     @Override
     public void onItemClick(int position) {
-        String dsHospitalUID = listHospitalItem.get(position).getHospitalUID();
+        String dsHospitalUID =  listHospitalItem.get(position).getHospitalUID();
         String dsHospitalName = listHospitalItem.get(position).getHospitalName();
 
         Intent intent = new Intent(getApplicationContext(), Category.class);
-        intent.putExtra("dsHospitalUID", dsHospitalUID);
+        intent.putExtra("dsHospitalUID",  dsHospitalUID);
         intent.putExtra("dsHospitalName", dsHospitalName);
         startActivity(intent);
     }

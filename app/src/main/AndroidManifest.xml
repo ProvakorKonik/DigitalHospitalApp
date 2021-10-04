@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".View.Category"></activity>
+
         <activity android:name=".View.CategoryAdd" />
         <activity android:name=".View.Hospital_Add" />
         <activity android:name=".View.LoginRegistration" />

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.shrabonti.digitalhospital.HospitalModel;
+import com.shrabonti.digitalhospital.Model.HospitalModel;
 import com.shrabonti.digitalhospital.R;
 import com.shrabonti.digitalhospital.RecylerviewClickInterface;
 import com.squareup.picasso.Picasso;
