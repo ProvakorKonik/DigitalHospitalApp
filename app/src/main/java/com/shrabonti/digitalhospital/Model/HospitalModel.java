@@ -10,7 +10,10 @@ public class HospitalModel {
     private String HospitalAddress= "NO";
     private long HospitaliPriority = 0;
 
-    public HospitalModel(String hospitalUID,String hospitalName, String hospitalPhotoUrl, String hospitalBio, String hospitalCreator, String hospitalAddress, long hospitaliPriority) {
+    public HospitalModel() {
+    }
+
+    public HospitalModel(String hospitalUID, String hospitalName, String hospitalPhotoUrl, String hospitalBio, String hospitalCreator, String hospitalAddress, long hospitaliPriority) {
         HospitalUID = hospitalUID;
         HospitalName = hospitalName;
         HospitalPhotoUrl = hospitalPhotoUrl;
@@ -18,9 +21,6 @@ public class HospitalModel {
         HospitalCreator = hospitalCreator;
         HospitalAddress = hospitalAddress;
         HospitaliPriority = hospitaliPriority;
-    }
-
-    public HospitalModel() {
     }
 
     public String getHospitalUID() {

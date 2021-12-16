@@ -25,11 +25,12 @@ public class HospitalVM extends AndroidViewModel {
         Log.d("ViewModel", "allViewModel:4 Level_D_VM start");
     }
     public MutableLiveData mLiveData;
-    public MutableLiveData<List<HospitalModel>> LoadLevel4List() {
+    public MutableLiveData<List<HospitalModel>> LoadHospitalList() {
         List<HospitalModel> listHospitalItem ; listHospitalItem =new ArrayList<>();
 
-        CollectionReference notebookRef;
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference notebookRef;
         Log.d("ViewModel", "allViewModel:4 LoadLevel4List start");
 
         notebookRef = db.collection("AllHospital");
@@ -48,15 +49,15 @@ public class HospitalVM extends AndroidViewModel {
                                 Log.d("ViewModel", "allViewModel:4 queryDocumentSnapshots empty");
                             }else {
                                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                    HospitalModel book_model = documentSnapshot.toObject(HospitalModel.class);
+                                    HospitalModel hospital_model = documentSnapshot.toObject(HospitalModel.class);
                                     //messageModel.setDocumentID(documentSnapshot.getId());
                                     String dsHospital_UID = documentSnapshot.getId();
-                                    String dsHospital_Name = book_model.getHospitalName();
-                                    String dsHospital_PhotoUrl = book_model.getHospitalPhotoUrl();
-                                    String dsHospital_Bio= book_model.getHospitalBio();
-                                    String dsHospital_Creator= book_model.getHospitalCreator();
-                                    String dsHospital_Address = book_model.getHospitalAddress();
-                                    long dibookiPriority = book_model.getHospitaliPriority();
+                                    String dsHospital_Name = hospital_model.getHospitalName();
+                                    String dsHospital_PhotoUrl = hospital_model.getHospitalPhotoUrl();
+                                    String dsHospital_Bio= hospital_model.getHospitalBio();
+                                    String dsHospital_Creator= hospital_model.getHospitalCreator();
+                                    String dsHospital_Address = hospital_model.getHospitalAddress();
+                                    long dibookiPriority = hospital_model.getHospitaliPriority();
 
                                     //String UID, String hospitalName, String hospitalPhotoUrl, String hospitalBio, String hospitalCreator, String hospitalAddress, long hospitaliPriority
                                     listHospitalItem.add(new HospitalModel(dsHospital_UID,dsHospital_Name, dsHospital_PhotoUrl,dsHospital_Bio,dsHospital_Creator, dsHospital_Address, dibookiPriority));

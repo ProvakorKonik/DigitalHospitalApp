@@ -30,7 +30,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import com.shrabonti.digitalhospital.MainActivity;
 import com.shrabonti.digitalhospital.R;
 import com.squareup.picasso.Picasso;
 
@@ -43,6 +42,7 @@ public class CategoryAdd extends AppCompatActivity {
     private EditText mCategory_Name, mCategory_Info, mCategory_Priority, mCategory_Views;
 
     private Button mCategory_UpdateBtn;
+    private String dUserUID = "NO";
     private FirebaseUser user;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener; //For going to Account Activity Page
@@ -59,7 +59,7 @@ public class CategoryAdd extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     //Variablls
-    private String dUserUID = "NO";
+
     private String dsPhotoUrl = "NO", dsCategoryName = "NO", dsCategoryInfo = "NO", dsCategoryPriority = "NO",  dsCategoryViews = "NO";
     private int  diCategoryPriority = 0, diCategoryViews = 0;
     private String dsLevel1_Name = "NO", dsLevel2_Name = "NO";

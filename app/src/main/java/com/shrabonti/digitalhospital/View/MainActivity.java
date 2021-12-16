@@ -1,4 +1,4 @@
-package com.shrabonti.digitalhospital;
+package com.shrabonti.digitalhospital.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,10 +23,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.shrabonti.digitalhospital.Adapter.HospitalAdapter;
+import com.shrabonti.digitalhospital.LoginCheck;
 import com.shrabonti.digitalhospital.Model.HospitalModel;
-import com.shrabonti.digitalhospital.View.Category;
-import com.shrabonti.digitalhospital.View.Hospital_Add;
-import com.shrabonti.digitalhospital.View.LoginRegistration;
+import com.shrabonti.digitalhospital.R;
+import com.shrabonti.digitalhospital.RecylerviewClickInterface;
 import com.shrabonti.digitalhospital.ViewModel.HospitalVM;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements RecylerviewClickI
     private Button mLoginBtn;
     private Button mAddHospitalBtn;
     //RecyclerView
-    private RecyclerView mBook_RecyclerView;
+    private RecyclerView mHospital_RecyclerView;
     List<HospitalModel> listHospitalItem;
     HospitalAdapter mhospital_adapter;
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements RecylerviewClickI
 
         mLoginBtn = (Button)findViewById(R.id.main_login_btn);
         mAddHospitalBtn = (Button)findViewById(R.id.main_add_hospital);
-        mBook_RecyclerView = (RecyclerView)findViewById(R.id.main_hospital_recyclerview);
+        mHospital_RecyclerView = (RecyclerView)findViewById(R.id.main_hospital_recyclerview);
         listHospitalItem = new ArrayList<>();
 
         mAuth = FirebaseAuth.getInstance();
@@ -65,10 +65,8 @@ public class MainActivity extends AppCompatActivity implements RecylerviewClickI
                     mLoginBtn.setText("My Profile");
                     checkUserType();
                 }else{
-                    /*Toast.makeText(getApplicationContext(),"Please Login", Toast.LENGTH_SHORT).show();;
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);*/
+                    mLoginBtn.setText("Login");
+                    mAddHospitalBtn.setVisibility(View.GONE);
                 }
             }
         };
@@ -97,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements RecylerviewClickI
     private void callViewModel() {
         Log.d("ViewModel", "allViewModel:1 hospitalVm start");
         hospitalVm = new ViewModelProvider(this).get(HospitalVM.class);
-        hospitalVm.LoadLevel4List().observe(this, new Observer<List<HospitalModel>>() {
+        hospitalVm.LoadHospitalList().observe(this, new Observer<List<HospitalModel>>() {
             @Override
             public void onChanged(List<HospitalModel> list_hospital_models) {
                 Log.d("ViewModel", "allViewModel:1 onChanged listview4 size = "+list_hospital_models.size());
@@ -120,11 +118,11 @@ public class MainActivity extends AppCompatActivity implements RecylerviewClickI
 
                     int orientation = getResources().getConfiguration().orientation;
                     if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                        mBook_RecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this,2));
-                        mBook_RecyclerView.setAdapter(mhospital_adapter);
+                        mHospital_RecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this,2));
+                        mHospital_RecyclerView.setAdapter(mhospital_adapter);
                     } else {
-                        mBook_RecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false));
-                        mBook_RecyclerView.setAdapter(mhospital_adapter);
+                        mHospital_RecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false));
+                        mHospital_RecyclerView.setAdapter(mhospital_adapter);
                     }
                 }
             }
@@ -138,10 +136,10 @@ public class MainActivity extends AppCompatActivity implements RecylerviewClickI
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
                     String dUserType = documentSnapshot.getString("userType");
-                    if(dUserType.equals("Teacher")){
-                        //mAddBook.setVisibility(View.VISIBLE);
+                    if(dUserType.equals("Creator")){
+                        mAddHospitalBtn.setVisibility(View.VISIBLE);
                     }else{
-                        //mAddBook.setVisibility(View.GONE);
+                        mAddHospitalBtn.setVisibility(View.GONE);
 
                     }
                 }else{
@@ -170,10 +168,24 @@ public class MainActivity extends AppCompatActivity implements RecylerviewClickI
     public void onItemClick(int position) {
         String dsHospitalUID =  listHospitalItem.get(position).getHospitalUID();
         String dsHospitalName = listHospitalItem.get(position).getHospitalName();
+        String dsHospitalCreatorUID = listHospitalItem.get(position).getHospitalCreator();
 
-        Intent intent = new Intent(getApplicationContext(), Category.class);
+        Intent intent = new Intent(MainActivity.this, Category.class);
         intent.putExtra("dsHospitalUID",  dsHospitalUID);
         intent.putExtra("dsHospitalName", dsHospitalName);
+        intent.putExtra("dsHospitalCreatorUID", dsHospitalCreatorUID);
         startActivity(intent);
     }
+
+    @Override
+    public void onAddCircleClick(int position) {
+
+    }
+
+    @Override
+    public void onDoctorItemClick(int position) {
+
+    }
+
+
 }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
     android:layout_marginStart="20dp"
     android:layout_marginVertical="20dp"
     android:id="@+id/cardview_level_d_item"
@@ -36,7 +35,7 @@
 
 
         <ImageView
-            android:id="@+id/card_category_image9card"
+            android:id="@+id/card_category_add_circle_img"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_baseline_add_circle_outline_24"
@@ -52,7 +51,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="Heart"
-            android:textColor="#2d2d2d"
+
+            android:textColor="@color/black"
             android:textSize="16sp"
             cardview:layout_constraintBottom_toBottomOf="parent"
             cardview:layout_constraintEnd_toEndOf="@+id/card_category_imagecard"

@@ -32,7 +32,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.shrabonti.digitalhospital.MainActivity;
 import com.shrabonti.digitalhospital.R;
 import com.squareup.picasso.Picasso;
 
@@ -211,48 +210,10 @@ public class LoginRegistration extends AppCompatActivity {
     }
     String dRetrivePhotoURL = "NO";
     private void RetriveUserOldInformation() {
-        /*if(user != null){
-            dUserUID = FirebaseAuth.getInstance().getUid();
-            db.collection("Quiz").document("REGISTER").collection("NORMAL_USER")
-                    .document(dUserUID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if(documentSnapshot.exists()){
-                        dRetrivePhotoURL  = documentSnapshot.getString("photoURL");
-                        dUserName = documentSnapshot.getString("name");
-                        dHomeAddress = documentSnapshot.getString("homeAddress");
-                        dUserPhone = documentSnapshot.getString("phone_no");
-                        dUserType = documentSnapshot.getString("userType");
 
-                        Picasso.get().load(dRetrivePhotoURL).into(mUserProfilePic);
-                        mUserInfoHomeAddress.setText(dHomeAddress);
-                        mUserInfoPhoneNo.setText(dUserPhone);
-                        if(dUserType.equals("User")){
-                            mRadioTypeUser.setChecked(true);
-                        }else if(dUserType.equals("Rider")){
-                            mRadioTypeRider.setChecked(true);
-                        }else {
-                            mRadioTypeAdmin.setChecked(true);
-                        }
-                    }else{
-                        Toast.makeText(getApplicationContext(), "No User Data Exists", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(), "Retrive Failed ", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }else{
-            Toast.makeText(getApplicationContext(), "User Not Logged In", Toast.LENGTH_SHORT).show();
-        }*/
     }
 
     private int diUserType = 1;
-
-
     //Uplaoding Photo to FireStorage
     private void UploadCropedImageFunction(Uri filePath) {
         if(!dRetrivePhotoURL.equals("NO")){

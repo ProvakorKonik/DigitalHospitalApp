@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="purple_20">#F5EDFF</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -9,6 +10,8 @@
     <color name="white">#FFFFFFFF</color>
 
 
+    <color name="GoldenRating">#e67e17</color>
+    <color name="Red100">#ffe6eb</color>
     <color name="Red200">#ffe0e7</color>
     <color name="Red400">#e3889c</color>
     <color name="Red600">#c76379</color>
@@ -16,6 +19,9 @@
     <color name="Red800">#9c1431</color>
     <color name="Red900">#820520</color>
     <color name="Red999">#6e0018</color>
+
+    <color name="duskYellow">#A69D62</color>
+    <color name="colorLightGray">#e5e5e5</color>
 
 
 </resources>

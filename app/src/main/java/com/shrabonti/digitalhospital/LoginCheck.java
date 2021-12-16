@@ -71,7 +71,7 @@ public class LoginCheck extends AppCompatActivity {
                 .createSignInIntentBuilder()
                 .setAvailableProviders(provider)
                 .setTosAndPrivacyPolicyUrls("https://google.com", "https://facebook.com")
-                .setTheme(R.style.LoginTheme)
+                //.setTheme(R.style.LoginTheme)
                 .build();
 
         startActivityForResult(intent,AUTHUI_REQUEST_CODE);
